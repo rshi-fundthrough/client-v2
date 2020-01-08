@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -35,4 +35,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+table.container{
+  border: 50px;
+  text-align: left;
+  
+}
+
+table.container td{
+  padding-right: 50px;
+  padding-top : 20px;
+  padding-bottom : 20px;
+  min-height: 300px;
+  
+}
+
+
+table.container img {
+  max-height: 300px;
 }
