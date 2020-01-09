@@ -7,6 +7,11 @@
 .isbn{
     font-size: medium;
 }
+.desc{
+    padding-top: 20px;
+    font-size: small;
+    word-wrap: normal;
+}
 .options{
     font-size: medium;
     text-align:right;
