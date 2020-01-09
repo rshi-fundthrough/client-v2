@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 // import { render } from 'react-dom';
-import BookInfoRow from "./BookInfoRow.js";
+import BookInfoRow from "./components/BookInfoRow.js";
 
 class App extends React.Component {
   // check if the database has any books, if none then populate with ones from NYT

@@ -9,8 +9,8 @@ function BookInfoRow(props){
     
     function deleteBook(e){
         axios.delete('http://localhost:3000/books/' + props.book.id)
-        .then(response=>console.log('Book', props.book.id, 'was successfully delete.'))
-        .catch(err=>console.error(err));
+        .then(response => console.log('Book', props.book.id, 'was successfully delete.', response))
+        .catch(err => console.error(err));
         e.preventDefault(); // call if want to do own behaviour
         // remove book from self in order to prevent double deleting
     }
