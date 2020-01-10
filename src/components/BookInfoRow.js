@@ -1,7 +1,7 @@
 import React from 'react';
 import './BookInfoRow.css';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
 
 
 function BookInfoRow(props){

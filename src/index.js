@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 // redux things
 import { Provider } from 'react-redux';
-import { addItem, deleteItem } from './actions.js';
+// import { addItem, deleteItem } from './actions.js';
 import { createStore } from 'redux';
 import bookApp from './reducers.js';
 const store = createStore(bookApp);
