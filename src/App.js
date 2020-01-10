@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 // import { render } from 'react-dom';
 import BookInfoRow from "./components/BookInfoRow.js";
+import { deleteItem } from "./actions";
+import { connect } from "react-redux";
 
 class App extends React.Component {
   // check if the database has any books, if none then populate with ones from NYT
@@ -69,7 +71,6 @@ class App extends React.Component {
         imgUrl: bk.book_image
       }).then(response=>{
         console.log(response)
-        // response is just the object that was saved
         this.setState(state => {
           return {
             bookInfo: [...state.bookInfo, response.data]
@@ -84,8 +85,22 @@ class App extends React.Component {
     // makes api call to edit a book using PUT/PATCH
   }
 
-  deleteBook(){
-    // makes api to delete record from DB
+  // maybe just implement the redux here for ease
+  getBooks(bookList){
+    // return bookList, this is kind of redundant but may be needed later 
+    return bookList;
+  }
+
+
+  // maps the state from redux to props 
+  mapStateToProps(state){
+    return {
+      bookList: state.books // update everything else
+    }
+  }
+
+  mapDispatchToProps(dispatch){
+
   }
 
   render(){
@@ -94,7 +109,7 @@ class App extends React.Component {
 
     // use map function to display all the rows
     let bookList = this.state.bookInfo.map( (bookObj,index) => {
-      return <BookInfoRow key={index} book={bookObj}/>;
+      return <BookInfoRow key={index} book={bookObj} index={index}/>;
     });
 
     return (
@@ -111,5 +126,7 @@ class App extends React.Component {
     )
   };
 }
+
+// App = connect()(App);
 
 export default App;

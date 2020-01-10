@@ -4,7 +4,28 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// redux things
+import { Provider } from 'react-redux';
+import { addItem, deleteItem } from './actions.js';
+import { createStore } from 'redux';
+import bookApp from './reducers.js';
+const store = createStore(bookApp);
+// console.log(store.getState());
+
+// everytime store update log the state
+// subscribe returns unsubscribe function
+// const unsubscribe = store.subscribe(() => console.log(store.getState()))
+// store.dispatch(addItem({title: "book"}));
+// store.dispatch(addItem({title: "Yeet"}));
+// store.dispatch(deleteItem(0));
+// unsubscribe(); // stop listening to store updates
+
+ReactDOM.render(
+    (<Provider store={store}>
+        <App />
+    </Provider>), 
+    document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

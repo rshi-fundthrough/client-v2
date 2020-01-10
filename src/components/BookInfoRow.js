@@ -12,7 +12,11 @@ function BookInfoRow(props){
         .then(response => console.log('Book', props.book.id, 'was successfully delete.', response))
         .catch(err => console.error(err));
         e.preventDefault(); // call if want to do own behaviour
-        // remove book from self in order to prevent double deleting
+        // remove book from state in order to prevent double deleting
+    }
+
+    function foo(e){
+        console.log(e);
     }
 
     return (
@@ -25,7 +29,7 @@ function BookInfoRow(props){
                 <div className="desc"><p>{props.book.description}</p></div>
             </td>
             <td className="options">
-                <div><button>Edit</button></div>
+                <div><button href="#" onClick={foo}>Edit</button></div>
                 <div><button href="#" onClick={deleteBook} >Delete</button></div>
             </td>
         </tr>
