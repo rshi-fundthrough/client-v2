@@ -73,7 +73,6 @@ class BookInfoRow extends React.Component {
             })
         .then(response => {
             // update book in state
-            // this.props.dispatch(deleteItem(this.props.index));
             console.log('Book', this.props.book.id, 'was successfully updated.', response);
             this.setState({
                 isEdittingTitle: false,
