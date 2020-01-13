@@ -159,9 +159,7 @@ class BookInfoRow extends React.Component {
                         <div className="author" onClick={this.editAuthor}>by {this.state.author}</div>
                         <div className="isbn">ISBN10 : {" "+this.props.book.isbn10}</div>
                         <div className="desc"><p>{this.props.book.description}</p></div>
-                    </td>
-                    <td className="options">
-                        <div><button href="#" onClick={this.deleteBook}>Delete</button></div>
+                        <div className="options"><button href="#" onClick={this.deleteBook}>Delete</button></div>
                     </td>
                 </tr>
             );
