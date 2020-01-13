@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { DELETE_ITEM, ADD_ITEM, MASS_ADD } from './actions';
+import { DELETE_ITEM, ADD_ITEM, MASS_ADD, UPDATE_ITEM } from './actions';
 
 const initialState = {
     books: []
@@ -24,6 +24,10 @@ function books(state = initialState.books, action){
             ];
         case MASS_ADD:
             return action.bookArr
+        case UPDATE_ITEM:
+            let temp = [...state];
+            temp[action.index] = action.book;
+            return temp;
         default:
             return state;
     }

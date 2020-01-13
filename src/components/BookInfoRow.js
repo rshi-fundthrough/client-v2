@@ -1,7 +1,7 @@
 import React from 'react';
 import './BookInfoRow.css';
 import axios from 'axios';
-import { deleteItem } from '../actions.js';
+import { deleteItem, updateItem } from '../actions.js';
 import { connect } from 'react-redux';
 
 
@@ -81,6 +81,10 @@ class BookInfoRow extends React.Component {
                 title: t,
                 author: a
             });
+            this.props.dispatch(updateItem(this.props.index, Object.assign({},
+                this.props.book, {title: t, author: a}    
+            )));
+
         })
         .catch(err => {
             console.error(err);

@@ -8,6 +8,7 @@
 export const DELETE_ITEM = "DELETE_ITEM";
 export const ADD_ITEM = "ADD_ITEM";
 export const MASS_ADD = "MASS_ADD";
+export const UPDATE_ITEM = "UPDATE_ITEM";
 
 // action creators
 export function deleteItem(index){
@@ -29,4 +30,12 @@ export function massAdd(bookArr){
         type: MASS_ADD,
         bookArr
     }
+}
+
+export function updateItem(index, book){
+    return {
+        type: UPDATE_ITEM,
+        book,
+        index
+    };
 }
