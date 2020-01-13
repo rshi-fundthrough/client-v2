@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import BookInfoList from '../components/BookInfoList';
 // get action creators 
-import { deleteItem, addItem } from "../actions";
+import { deleteItem, addItem, massAdd } from "../actions";
 
 // this cmp is for the layer for BookList that iteracts with the store
 
@@ -18,7 +18,11 @@ const mapDispatchToProps = dispatch => {
         },
         onGetBook: book => {
             dispatch(addItem(book));
+        },
+        onMassGet: bookArr => {
+            dispatch(massAdd(bookArr));
         }
+        
     }
 }
 

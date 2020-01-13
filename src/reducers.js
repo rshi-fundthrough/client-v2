@@ -1,23 +1,29 @@
 import { combineReducers } from 'redux';
-import { DELETE_ITEM, ADD_ITEM } from './actions';
+import { DELETE_ITEM, ADD_ITEM, MASS_ADD } from './actions';
+
+const initialState = {
+    books: []
+}
 
 // name of reducer has to be the same as the name of the state item that is being changed
-function books(state = [], action){
+function books(state = initialState.books, action){
     switch(action.type){
         case DELETE_ITEM:{
-            let temp = []
-            state.forEach((bk, i) => {
-                if(i !== action.index){
-                    temp.push(bk); // this is pass by ref but we aren't changing any values so should be fine
-                }
+            let temp = [];
+            state.forEach( (bk,i) => {
+                if(action.index !== i){
+                    temp.push(bk);
+                } 
             });
             return temp;
         }
         case ADD_ITEM:
             return [
                 ...state,
-                action.book
+                 action.book
             ];
+        case MASS_ADD:
+            return action.bookArr
         default:
             return state;
     }

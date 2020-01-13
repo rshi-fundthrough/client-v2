@@ -18,5 +18,15 @@
 }
 .options :hover{
     color: grey;
+}
 
+.clickToEdit .title:hover, .clickToEdit .author:hover{
+    color: grey;
+}
+
+.editForm label{
+    font-size: small
+}
+.editForm input{
+    font-size: large
 }

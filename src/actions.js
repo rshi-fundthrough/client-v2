@@ -7,6 +7,7 @@
 // constants, action types
 export const DELETE_ITEM = "DELETE_ITEM";
 export const ADD_ITEM = "ADD_ITEM";
+export const MASS_ADD = "MASS_ADD";
 
 // action creators
 export function deleteItem(index){
@@ -21,4 +22,11 @@ export function addItem(book){
         type: ADD_ITEM,
         book
     };
+}
+
+export function massAdd(bookArr){
+    return {
+        type: MASS_ADD,
+        bookArr
+    }
 }
