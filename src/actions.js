@@ -50,7 +50,7 @@ export const updateBook = (index, title, author, book) => dispatch => {
         .then(response => {
             // update book in state
             updateItem(index, Object.assign({},
-                book, {title: title, author: author}    
+                book, {title, author}    
             ))(dispatch);
             resolve(response);
         })
@@ -79,7 +79,7 @@ export const getBooks = () => dispatch => {
         if(response.data.length === 0){
             // if there are no items in db make call to NYT
             console.log('No elements in api calling NYT api');
-            getNYTBooks();
+            getNYTBooks(dispatch);
         } else {
             // there are items just slap them in the client
             console.log(response.data);
@@ -92,13 +92,13 @@ export const getBooks = () => dispatch => {
     });
 }
 
-const getNYTBooks = () => {
+const getNYTBooks = (dispatch) => {
     // call the NYT api
     axios.get('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=SOCAlRIHdoYLR2gGIUGknceo5m8rACnt')
     .then(response=>{
       console.log('Received NYT books');
       // console.log(response.data.results.books);
-      setThisBooks(response.data.results.books);
+      setThisBooks(response.data.results.books)(dispatch);
     })
     .catch(err => console.error(err));
 }
@@ -124,6 +124,6 @@ const setThisBooks = (bookList) => dispatch => {
     }).then(resp => {
         console.log(resp);
         massAdd(resp.data)(dispatch);
-    }).catch();
+    }).catch(err => console.error(err));
     
 }

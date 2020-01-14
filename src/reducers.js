@@ -9,13 +9,9 @@ const initialState = {
 function bookApp(state = initialState, action){
     switch(action.type){
         case DELETE_ITEM:{
-            let temp = [];
-            state.books.forEach( (bk,i) => {
-                if(action.index !== i){
-                    temp.push(bk);
-                } 
-            });
-            return { books: temp };
+            let books = [...state.books];
+            books.splice(action.index, 1);
+            return { books };
         }
         case ADD_ITEM:
             return {

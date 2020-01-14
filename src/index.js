@@ -11,15 +11,15 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk"
 import bookApp from './reducers.js';
 const store = createStore(bookApp, applyMiddleware(thunk));
-// console.log(store.getState());
+console.log(store.getState());
 
 // everytime store update log the state
 // subscribe returns unsubscribe function
-// const unsubscribe = store.subscribe(() => console.log(store.getState()))
+const unsubscribe = store.subscribe(() => console.log(store.getState()))
 // store.dispatch(addItem({title: "book"}));
 // store.dispatch(addItem({title: "Yeet"}));
 // store.dispatch(deleteItem(0));
-// unsubscribe(); // stop listening to store updates
+unsubscribe(); // stop listening to store updates
 
 ReactDOM.render(
     (<Provider store={store}>

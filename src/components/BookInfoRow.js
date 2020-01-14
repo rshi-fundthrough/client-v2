@@ -23,14 +23,24 @@ class BookInfoRow extends React.Component {
     // functions that use this have to be => or 'this' will be binded to the component that was clicked
     // if called from a button or something
 
-    deleteBook = () => {
+    static getDerivedStateFromProps(nextProps){
+        // required to update the state of the cmp when the parent passes new props to it
+        return{
+            title: nextProps.book.title,
+            author: nextProps.book.author,
+        };
+    }
+
+    deleteSelf = e => {
+        e.preventDefault();
         deleteBook(this.props.book.id, this.props.index)(this.props.dispatch);
     }
 
     editTitle = e => {
         e.preventDefault();
         this.setState({
-            isEdittingTitle: true
+            isEdittingTitle: true,
+            tempTitle: this.state.title
         });
     }
     handleChangeTitle = e => {
@@ -43,7 +53,8 @@ class BookInfoRow extends React.Component {
     editAuthor = e => {
         e.preventDefault();
         this.setState({
-            isEdittingAuthor: true
+            isEdittingAuthor: true,
+            tempAuthor: this.state.author
         });
     }
     handleChangeAuthor = e => {
@@ -72,11 +83,12 @@ class BookInfoRow extends React.Component {
         })
         .catch(err => {
             console.error(err);
-            this.cancelEditBook();
+            this.cancelEditBook(e);
         });   
     }
 
-    cancelEditBook = () => {
+    cancelEditBook = e => {
+        e.preventDefault()
         this.setState({
             isEdittingTitle: false,
             isEdittingAuthor: false,
@@ -142,7 +154,7 @@ class BookInfoRow extends React.Component {
                         <div className="author" onClick={this.editAuthor}>by {this.state.author}</div>
                         <div className="isbn">ISBN10 : {" "+this.props.book.isbn10}</div>
                         <div className="desc"><p>{this.props.book.description}</p></div>
-                        <div className="options"><button href="#" onClick={this.deleteBook}>Delete</button></div>
+                        <div className="options"><button href="#" onClick={this.deleteSelf}>Delete</button></div>
                     </td>
                 </tr>
             );
@@ -150,4 +162,6 @@ class BookInfoRow extends React.Component {
     }
 }
 
-export default connect()(BookInfoRow);
+const mapStateToProps = state => {return {}}
+
+export default connect(mapStateToProps)(BookInfoRow);

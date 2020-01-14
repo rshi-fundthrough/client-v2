@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onDelete: index => dispatch(deleteItem(index)),
         onGetBook: book => dispatch(addItem(book)),
-        getBooks: () => dispatch(getBooks())
+        getBooks: () => getBooks()(dispatch)
         
     }
 }
