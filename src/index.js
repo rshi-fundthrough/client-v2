@@ -7,9 +7,10 @@ import * as serviceWorker from './serviceWorker';
 // redux things
 import { Provider } from 'react-redux';
 // import { addItem, deleteItem } from './actions.js';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from "redux-thunk"
 import bookApp from './reducers.js';
-const store = createStore(bookApp);
+const store = createStore(bookApp, applyMiddleware(thunk));
 // console.log(store.getState());
 
 // everytime store update log the state

@@ -1,7 +1,6 @@
 import React from 'react';
 import './BookInfoRow.css';
-import axios from 'axios';
-import { deleteItem, updateItem } from '../actions.js';
+import { deleteBook, updateBook } from '../actions.js';
 import { connect } from 'react-redux';
 
 
@@ -24,15 +23,8 @@ class BookInfoRow extends React.Component {
     // functions that use this have to be => or 'this' will be binded to the component that was clicked
     // if called from a button or something
 
-    deleteBook = e => {
-        e.preventDefault(); // call if want to do own behaviour
-        axios.delete('http://localhost:3000/books/' + this.props.book.id)
-        .then(response => {
-            // remove book from state in order to prevent double deleting
-            this.props.dispatch(deleteItem(this.props.index));
-            console.log('Book', this.props.book.id, 'was successfully delete.', response);
-        })
-        .catch(err => console.error(err));   
+    deleteBook = () => {
+        deleteBook(this.props.book.id, this.props.index)(this.props.dispatch);
     }
 
     editTitle = e => {
@@ -62,15 +54,11 @@ class BookInfoRow extends React.Component {
     }
 
     saveBook = e => {
-        e.preventDefault();
+        e.preventDefault(); // call if want to do own behaviour
         // grab the values from the input fields send request and change state on resolve, cancel on reject 
         let t = this.state.tempTitle;
         let a = this.state.tempAuthor;
-        axios.patch('http://localhost:3000/books/' + this.props.book.id,
-            {
-                title: t,
-                author: a
-            })
+        updateBook(this.props.index, t, a, this.props.book)(this.props.dispatch) // doing dispatch(...) and ..()(dispatch) both work
         .then(response => {
             // update book in state
             console.log('Book', this.props.book.id, 'was successfully updated.', response);
@@ -80,9 +68,6 @@ class BookInfoRow extends React.Component {
                 title: t,
                 author: a
             });
-            this.props.dispatch(updateItem(this.props.index, Object.assign({},
-                this.props.book, {title: t, author: a}    
-            )));
 
         })
         .catch(err => {
@@ -91,8 +76,7 @@ class BookInfoRow extends React.Component {
         });   
     }
 
-    cancelEditBook = e => {
-        // e.preventDefault();
+    cancelEditBook = () => {
         this.setState({
             isEdittingTitle: false,
             isEdittingAuthor: false,

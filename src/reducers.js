@@ -29,7 +29,7 @@ function bookApp(state = initialState, action){
                 books: action.bookArr
             };
         case UPDATE_ITEM:
-            let temp = [...state];
+            let temp = [...state.books];
             temp[action.index] = action.book;
             return { books: temp };
         default:
